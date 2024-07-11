@@ -1,19 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Expose } from 'class-transformer';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
+  @PrimaryColumn()
+  @Expose()
   productCode: string;
 
   @Column()
-  productDescription: string;
+  @Expose()
+  location: string;
 
-  @Column()
-  locationCode: string;
-
-  @Column({ type: 'decimal', precision: 18, scale: 2 })
+  @Column({ type: 'float' })
+  @Expose()
   price: number;
 }
