@@ -13,7 +13,7 @@ export class ProductsService {
   ) {}
 
   // find one
-  async findProduct(where: FindOptionsWhere<Product> = {}): Promise<Product> {
+  async findProduct(where: FindOptionsWhere<Product>): Promise<Product> {
     return this.productsRepository.findOneBy(where);
   }
 
