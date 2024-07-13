@@ -160,7 +160,7 @@ describe('ProductsService', () => {
 
       await expect(
         service.updateProduct(productCode, updateBody),
-      ).resolves.toBe(newProduct);
+      ).resolves.toEqual(newProduct);
 
       expect(mockRepository.update).toHaveBeenCalled();
       expect(mockRepository.update).toHaveBeenCalledWith(
@@ -189,7 +189,7 @@ describe('ProductsService', () => {
 
       await expect(
         service.updateProduct(productCode, updateBody),
-      ).resolves.toBe(newProduct);
+      ).resolves.toEqual(newProduct);
 
       expect(mockRepository.update).toHaveBeenCalled();
       expect(mockRepository.update).toHaveBeenCalledWith(
@@ -214,7 +214,7 @@ describe('ProductsService', () => {
 
       jest.spyOn(mockRepository, 'delete').mockReturnValue(deleteResult);
 
-      await expect(service.deleteProduct(productCode)).resolves.toBe(outcome);
+      await expect(service.deleteProduct(productCode)).resolves.toEqual(outcome);
 
       expect(mockRepository.delete).toHaveBeenCalled();
       expect(mockRepository.delete).toHaveBeenCalledWith({ productCode });
@@ -228,7 +228,7 @@ describe('ProductsService', () => {
 
       jest.spyOn(mockRepository, 'delete').mockReturnValue(deleteResult);
 
-      await expect(service.deleteProduct(productCode)).resolves.toBe(outcome);
+      await expect(service.deleteProduct(productCode)).resolves.toEqual(outcome);
 
       expect(mockRepository.delete).toHaveBeenCalled();
       expect(mockRepository.delete).toHaveBeenCalledWith({ productCode });
