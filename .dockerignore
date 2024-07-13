@@ -1,0 +1,12 @@
+node_modules
+dist
+test
+database
+
+.env
+.eslintrc.js
+.git/
+.prettierrc
+
+*docker-compose.
+*Dockerfile*

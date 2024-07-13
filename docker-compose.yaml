@@ -4,10 +4,24 @@ name: ms-backend
 services:
   db:
     build: ./database
-    container_name: DEV_POSTGRES
+    container_name: backend_db
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
       - POSTGRES_DB=${DB_NAME}
+
+  api:
+    build: .
+    container_name: backend_api
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - db
