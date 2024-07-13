@@ -1,13 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'PRODUCT' })
 export class Product {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   @Expose()
   @ApiProperty({
-    description: 'Unique product id',
+    description: 'Product unique id',
+    example: 1,
+    type: 'number',
+  })
+  id: number;
+
+  @Column({ unique: true })
+  @Expose()
+  @ApiProperty({
+    description: 'Unique product code',
     example: '1000',
   })
   productCode: string;

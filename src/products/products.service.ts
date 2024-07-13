@@ -9,18 +9,18 @@ import { UpdateProductDTO } from './dto/update-product.dto';
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
-    private readonly productsRespository: Repository<Product>,
+    private readonly productsRepository: Repository<Product>,
   ) {}
 
   // find one
   async findProduct(where: FindOptionsWhere<Product> = {}): Promise<Product> {
-    return this.productsRespository.findOneBy(where);
+    return this.productsRepository.findOneBy(where);
   }
 
   // create one
   async createProduct(createBody: CreateProductDTO): Promise<Product> {
     // Duplicate check
-    const findProduct = await this.productsRespository.findOneBy({
+    const findProduct = await this.productsRepository.findOneBy({
       productCode: createBody.productCode,
     });
 
@@ -29,8 +29,8 @@ export class ProductsService {
       throw new Error('DUPLICATE_PRODUCT');
     }
 
-    const newProduct = this.productsRespository.create(createBody);
-    await this.productsRespository.save(newProduct);
+    const newProduct = this.productsRepository.create(createBody);
+    await this.productsRepository.insert(newProduct);
 
     return newProduct;
   }
@@ -40,7 +40,7 @@ export class ProductsService {
     productCode: string,
     updateBody: UpdateProductDTO,
   ): Promise<Product> {
-    const result = await this.productsRespository.update(
+    const result = await this.productsRepository.update(
       { productCode },
       updateBody,
     );
@@ -49,12 +49,13 @@ export class ProductsService {
       return null;
     }
 
-    return this.productsRespository.findOneBy({ productCode });
+    const product = await this.productsRepository.findOneBy({ productCode });
+    return product;
   }
 
   // delete one
   async deleteProduct(productCode: string): Promise<boolean> {
-    const result = await this.productsRespository.delete({
+    const result = await this.productsRepository.delete({
       productCode,
     });
 

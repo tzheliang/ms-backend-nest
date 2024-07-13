@@ -1,9 +1,10 @@
 -- Create table
 CREATE TABLE IF NOT EXISTS public."PRODUCT" (
+	id serial4 NOT NULL,
 	"productCode" varchar NOT NULL,
 	"location" varchar NOT NULL,
 	price float8 NOT NULL,
-	PRIMARY KEY ("productCode")
+	PRIMARY KEY ("id")
 );
 
 -- Insert demo data

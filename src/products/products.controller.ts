@@ -19,8 +19,8 @@ import { CreateProductDTO } from './dto/create-product.dto';
 import { UpdateProductDTO } from './dto/update-product.dto';
 import { Product } from './product.entity';
 import { FindProductDTO } from './dto/find-product.dto';
-import { AuthGuard } from 'src/token/guards/auth.guard';
-import { AdminGuard } from 'src/token/guards/admin.guard';
+import { AuthGuard } from '../token/guards/auth.guard';
+import { AdminGuard } from '../token/guards/admin.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -33,10 +33,10 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { UnauthorizedErrorDTO } from 'src/errors/dto/error-401.dto';
-import { NotFoundErrorDTO } from 'src/errors/dto/error-404.dto';
-import { BadRequestErrorDTO } from 'src/errors/dto/error-400.dto';
-import { ForbiddenErrorDTO } from 'src/errors/dto/error-403.dto';
+import { UnauthorizedErrorDTO } from '../errors/dto/error-401.dto';
+import { NotFoundErrorDTO } from '../errors/dto/error-404.dto';
+import { BadRequestErrorDTO } from '../errors/dto/error-400.dto';
+import { ForbiddenErrorDTO } from '../errors/dto/error-403.dto';
 
 @Controller('product')
 @SerializeOptions({ strategy: 'excludeAll' })

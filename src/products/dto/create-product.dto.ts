@@ -4,7 +4,7 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 export class CreateProductDTO {
   @IsNotEmpty()
   @ApiProperty({
-    description: 'Unique product id',
+    description: 'Unique product code',
     example: '1000',
     minLength: 1,
   })
