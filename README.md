@@ -39,4 +39,5 @@ Repository for the code solution to NestJS backend test.
 6. Install dependencies for integrating with Postgres using TypeORM. `npm install --save @nestjs/typeorm typeorm pg`
 7. Install dependencies for input validation using decorators. `npm install --save class-validator class-transformer`
 8. Install dependencies for JWT. `npm install --save @nestjs/jwt`
-9. Install depedencies for Swagger. `npm install --save @nestjs/swagger`
+9. Install dependencies for Swagger. `npm install --save @nestjs/swagger`
+10. Install dependencies for configuration. `npm install --save @nestjs/config`
