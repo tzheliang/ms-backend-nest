@@ -2,6 +2,12 @@
 
 Repository for the code solution to NestJS backend test.
 
+## Setup instructions (Docker)
+
+1. Make sure docker and docker compose is installed.
+2. Create a copy of the `.env.example` file and rename to `.env`.
+3. Update the configurations as necessary to start the DB init process.
+
 ## Features
 
 - Get product information by providing a product code and location.
