@@ -23,7 +23,7 @@ import { DeleteProductDto } from './dto/delete-product.dto';
 import { AuthenticationGuard as AuthGuard } from 'src/token/guards/authentication.guard';
 import { AdminGuard } from 'src/token/guards/admin.guard';
 
-@Controller('products')
+@Controller('product')
 @SerializeOptions({ strategy: 'excludeAll' })
 @UseInterceptors(ClassSerializerInterceptor)
 export class ProductsController {
