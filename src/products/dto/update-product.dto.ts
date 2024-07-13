@@ -1,9 +1,6 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { OmitType } from '@nestjs/swagger';
+import { CreateProductDTO } from './create-product.dto';
 
-export class UpdateProductDTO {
-  @IsNotEmpty()
-  location: string;
-
-  @IsNumber()
-  price: number;
-}
+export class UpdateProductDTO extends OmitType(CreateProductDTO, [
+  'productCode',
+] as const) {}

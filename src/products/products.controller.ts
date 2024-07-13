@@ -18,21 +18,45 @@ import { ProductsService } from './products.service';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { UpdateProductDTO } from './dto/update-product.dto';
 import { Product } from './product.entity';
-import { FindProductDto } from './dto/find-product.dto';
-import { DeleteProductDto } from './dto/delete-product.dto';
+import { FindProductDTO } from './dto/find-product.dto';
 import { AuthenticationGuard as AuthGuard } from 'src/token/guards/authentication.guard';
 import { AdminGuard } from 'src/token/guards/admin.guard';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiForbiddenResponse,
+  ApiNoContentResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
+import { UnauthorizedErrorDTO } from 'src/errors/dto/error-401.dto';
+import { NotFoundErrorDTO } from 'src/errors/dto/error-404.dto';
+import { BadRequestErrorDTO } from 'src/errors/dto/error-400.dto';
+import { ForbiddenErrorDTO } from 'src/errors/dto/error-403.dto';
 
 @Controller('product')
 @SerializeOptions({ strategy: 'excludeAll' })
 @UseInterceptors(ClassSerializerInterceptor)
+@ApiTags('Product')
+@ApiBearerAuth()
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
   @UseGuards(AuthGuard)
+  @ApiOperation({ summary: 'Retrieve Product' })
+  @ApiOkResponse({ description: 'OK', type: Product })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+    type: UnauthorizedErrorDTO,
+  })
+  @ApiNotFoundResponse({ description: 'Not Found', type: NotFoundErrorDTO })
   async getProduct(
-    @Query() { productCode, location }: FindProductDto,
+    @Query() { productCode, location }: FindProductDTO,
   ): Promise<Product> {
     const product = await this.productsService.findProduct({
       productCode,
@@ -49,6 +73,18 @@ export class ProductsController {
   @Post()
   @HttpCode(200)
   @UseGuards(AuthGuard, AdminGuard)
+  @ApiOperation({ summary: 'Create new Product' })
+  @ApiOkResponse({ description: 'OK', type: Product })
+  @ApiBadRequestResponse({
+    description: 'Bad Request',
+    type: BadRequestErrorDTO,
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+    type: UnauthorizedErrorDTO,
+  })
+  @ApiForbiddenResponse({ description: 'Forbidden', type: ForbiddenErrorDTO })
+  @ApiNotFoundResponse({ description: 'Not Found', type: BadRequestErrorDTO })
   async createProduct(@Body() body: CreateProductDTO): Promise<Product> {
     try {
       const product = await this.productsService.createProduct(body);
@@ -68,6 +104,19 @@ export class ProductsController {
 
   @Put()
   @UseGuards(AuthGuard, AdminGuard)
+  @ApiOperation({ summary: 'Update Product' })
+  @ApiQuery({
+    name: 'productCode',
+    description: 'Product unique id',
+    example: '1000',
+  })
+  @ApiOkResponse({ description: 'OK', type: Product })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+    type: UnauthorizedErrorDTO,
+  })
+  @ApiForbiddenResponse({ description: 'Forbidden', type: ForbiddenErrorDTO })
+  @ApiNotFoundResponse({ description: 'Not Found', type: NotFoundErrorDTO })
   async updateProduct(
     @Query('productCode') productCode: string,
     @Body() body: UpdateProductDTO,
@@ -84,8 +133,21 @@ export class ProductsController {
   @Delete()
   @HttpCode(204)
   @UseGuards(AuthGuard, AdminGuard)
+  @ApiOperation({ summary: 'Delete Product' })
+  @ApiQuery({
+    name: 'productCode',
+    description: 'Product unique id',
+    example: '1000',
+  })
+  @ApiNoContentResponse({ description: 'No Content' })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+    type: UnauthorizedErrorDTO,
+  })
+  @ApiForbiddenResponse({ description: 'Forbidden', type: ForbiddenErrorDTO })
+  @ApiNotFoundResponse({ description: 'Not Found', type: NotFoundErrorDTO })
   async deleteProduct(
-    @Query() { productCode }: DeleteProductDto,
+    @Query('productCode') productCode: string,
   ): Promise<void> {
     const success = await this.productsService.deleteProduct(productCode);
 

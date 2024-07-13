@@ -8,17 +8,20 @@ Repository for the code solution to NestJS backend test.
 - Create a new product information by providing a product code and location.
 - Replace a product information by providing the product code, price and location.
 - Delete a product information by providing the product code.
+- View Swagger documentation for the API. Available at `/swagger`
 - (Testing Only) Get token for member role.
 - (Testing Only) Get token for admin role.
 
-## Assumptions made
+## Assumptions/Justifications
 
 1. Product code is assumed to be unique, to ensure only the specific record is updated when updated via the `PUT` endpoint.
 2. To comply with the requirement of using a single `PRODUCT` table, the table will be designed by denormalizing the product code, location and price columns.
 3. All API endpoints that requires authentication will be authenticated with a JWT.
 4. JWT will be provided using 2 custom endpoints, namely `/token/admin` and `/token/member`. These endpoints will not be secured for testing purposes.
 5. PostgreSQL docker container will be used for the purpose of demonstrating the features/functionalities of the API.
-6. Response serialization decorators to be included in the `*.entity.ts` files, rather than a separate `*.dto.ts` file.
+6. Response serialization decorators to be included in the `*.entity.ts` files, rather than using `*.dto.ts` files.
+7. NestJS jwt module will be used for JWT verification and generation.
+8. NestJS swagger module will be used for Swagger document generation.
 
 ## Steps taken for setup
 
@@ -30,3 +33,4 @@ Repository for the code solution to NestJS backend test.
 6. Install dependencies for integrating with Postgres using TypeORM. `npm install --save @nestjs/typeorm typeorm pg`
 7. Install dependencies for input validation using decorators. `npm install --save class-validator class-transformer`
 8. Install dependencies for JWT. `npm install --save @nestjs/jwt`
+9. Install depedencies for Swagger. `npm install --save @nestjs/swagger`
