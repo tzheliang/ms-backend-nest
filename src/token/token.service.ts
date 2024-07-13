@@ -9,9 +9,17 @@ export class TokenService {
 
   async createMemberToken(): Promise<Token> {
     const payload: TokenPayload = { role: 'member' };
-    const accessToken = await this.jwtService.signAsync(payload, {
-      expiresIn: '5m',
-    });
+    const accessToken = await this.jwtService.signAsync(payload);
+
+    const token = new Token();
+    token.accessToken = accessToken;
+
+    return token;
+  }
+
+  async createAdminToken(): Promise<Token> {
+    const payload: TokenPayload = { role: 'admin' };
+    const accessToken = await this.jwtService.signAsync(payload);
 
     const token = new Token();
     token.accessToken = accessToken;

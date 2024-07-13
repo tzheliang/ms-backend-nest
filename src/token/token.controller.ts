@@ -20,4 +20,10 @@ export class TokenController {
   async createMemberToken(): Promise<Token> {
     return this.tokenService.createMemberToken();
   }
+
+  @Post('/admin')
+  @HttpCode(200)
+  async createAdminToken(): Promise<Token> {
+    return this.tokenService.createAdminToken();
+  }
 }

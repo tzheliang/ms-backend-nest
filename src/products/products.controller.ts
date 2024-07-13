@@ -11,6 +11,7 @@ import {
   Put,
   Query,
   SerializeOptions,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
@@ -19,6 +20,8 @@ import { UpdateProductDTO } from './dto/update-product.dto';
 import { Product } from './product.entity';
 import { FindProductDto } from './dto/find-product.dto';
 import { DeleteProductDto } from './dto/delete-product.dto';
+import { AuthenticationGuard as AuthGuard } from 'src/token/guards/authentication.guard';
+import { AdminGuard } from 'src/token/guards/admin.guard';
 
 @Controller('products')
 @SerializeOptions({ strategy: 'excludeAll' })
@@ -27,6 +30,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
+  @UseGuards(AuthGuard)
   async getProduct(
     @Query() { productCode, location }: FindProductDto,
   ): Promise<Product> {
@@ -44,6 +48,7 @@ export class ProductsController {
 
   @Post()
   @HttpCode(200)
+  @UseGuards(AuthGuard, AdminGuard)
   async createProduct(@Body() body: CreateProductDTO): Promise<Product> {
     try {
       const product = await this.productsService.createProduct(body);
@@ -62,6 +67,7 @@ export class ProductsController {
   }
 
   @Put()
+  @UseGuards(AuthGuard, AdminGuard)
   async updateProduct(
     @Query('productCode') productCode: string,
     @Body() body: UpdateProductDTO,
@@ -77,6 +83,7 @@ export class ProductsController {
 
   @Delete()
   @HttpCode(204)
+  @UseGuards(AuthGuard, AdminGuard)
   async deleteProduct(
     @Query() { productCode }: DeleteProductDto,
   ): Promise<void> {
