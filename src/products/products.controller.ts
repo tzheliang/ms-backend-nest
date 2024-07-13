@@ -19,7 +19,7 @@ import { CreateProductDTO } from './dto/create-product.dto';
 import { UpdateProductDTO } from './dto/update-product.dto';
 import { Product } from './product.entity';
 import { FindProductDTO } from './dto/find-product.dto';
-import { AuthenticationGuard as AuthGuard } from 'src/token/guards/authentication.guard';
+import { AuthGuard } from 'src/token/guards/auth.guard';
 import { AdminGuard } from 'src/token/guards/admin.guard';
 import {
   ApiBadRequestResponse,

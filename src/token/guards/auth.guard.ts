@@ -9,8 +9,8 @@ import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { Request } from 'express';
 
 @Injectable()
-export class AuthenticationGuard implements CanActivate {
-  private readonly logger = new Logger(AuthenticationGuard.name);
+export class AuthGuard implements CanActivate {
+  private readonly logger = new Logger(AuthGuard.name);
 
   constructor(private readonly jwtService: JwtService) {}
 
