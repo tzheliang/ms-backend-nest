@@ -36,6 +36,8 @@ export class AuthGuard implements CanActivate {
 
       request['user'] = payload;
     } catch (err) {
+      this.logger.error(err);
+
       if (err instanceof TokenExpiredError) {
         throw new UnauthorizedException('Expired bearer token');
       }

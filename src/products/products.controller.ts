@@ -19,6 +19,7 @@ import { CreateProductDTO } from './dto/create-product.dto';
 import { UpdateProductDTO } from './dto/update-product.dto';
 import { Product } from './product.entity';
 import { FindProductDTO } from './dto/find-product.dto';
+import { UpdateDeleteProductDTO } from './dto/update-delete-product.dto';
 import { AuthGuard } from '../token/guards/auth.guard';
 import { AdminGuard } from '../token/guards/admin.guard';
 import {
@@ -118,7 +119,7 @@ export class ProductsController {
   @ApiForbiddenResponse({ description: 'Forbidden', type: ForbiddenErrorDTO })
   @ApiNotFoundResponse({ description: 'Not Found', type: NotFoundErrorDTO })
   async updateProduct(
-    @Query('productCode') productCode: string,
+    @Query() { productCode }: UpdateDeleteProductDTO,
     @Body() body: UpdateProductDTO,
   ): Promise<Product> {
     const product = await this.productsService.updateProduct(productCode, body);
@@ -147,7 +148,7 @@ export class ProductsController {
   @ApiForbiddenResponse({ description: 'Forbidden', type: ForbiddenErrorDTO })
   @ApiNotFoundResponse({ description: 'Not Found', type: NotFoundErrorDTO })
   async deleteProduct(
-    @Query('productCode') productCode: string,
+    @Query() { productCode }: UpdateDeleteProductDTO,
   ): Promise<void> {
     const success = await this.productsService.deleteProduct(productCode);
 
