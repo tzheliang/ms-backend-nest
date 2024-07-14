@@ -7,6 +7,7 @@ Repository for the code solution to NestJS backend test.
 1. Make sure docker and docker compose is installed.
 2. Create a copy of the `.env.example` file and rename to `.env`.
 3. Update the configurations as necessary to start the DB init process.
+4. Enter `docker compose up -d` to start the database and API.
 
 ## Features
 
