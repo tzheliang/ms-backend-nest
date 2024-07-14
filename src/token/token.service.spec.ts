@@ -5,7 +5,7 @@ import { Token } from './token.entity';
 
 describe('TokenService', () => {
   let tokenService: TokenService;
-  let mockJwtService = { signAsync: jest.fn() };
+  const mockJwtService = { signAsync: jest.fn() };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({

@@ -5,7 +5,7 @@ import { Token } from './token.entity';
 
 describe('TokenController', () => {
   let controller: TokenController;
-  let mockTokenService = {
+  const mockTokenService = {
     createMemberToken: jest.fn(),
     createAdminToken: jest.fn(),
   };

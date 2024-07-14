@@ -7,8 +7,8 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('ProductsController', () => {
   let controller: ProductsController;
-  let mockJwtService = {};
-  let mockProductsService = {
+  const mockJwtService = {};
+  const mockProductsService = {
     findProduct: jest.fn(),
     createProduct: jest.fn(),
     updateProduct: jest.fn(),

@@ -6,7 +6,7 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 
 describe('ProductsService', () => {
   let service: ProductsService;
-  let mockRepository = {
+  const mockRepository = {
     findOneBy: jest.fn(),
     create: jest.fn(),
     insert: jest.fn(),
@@ -214,7 +214,9 @@ describe('ProductsService', () => {
 
       jest.spyOn(mockRepository, 'delete').mockReturnValue(deleteResult);
 
-      await expect(service.deleteProduct(productCode)).resolves.toEqual(outcome);
+      await expect(service.deleteProduct(productCode)).resolves.toEqual(
+        outcome,
+      );
 
       expect(mockRepository.delete).toHaveBeenCalled();
       expect(mockRepository.delete).toHaveBeenCalledWith({ productCode });
@@ -228,7 +230,9 @@ describe('ProductsService', () => {
 
       jest.spyOn(mockRepository, 'delete').mockReturnValue(deleteResult);
 
-      await expect(service.deleteProduct(productCode)).resolves.toEqual(outcome);
+      await expect(service.deleteProduct(productCode)).resolves.toEqual(
+        outcome,
+      );
 
       expect(mockRepository.delete).toHaveBeenCalled();
       expect(mockRepository.delete).toHaveBeenCalledWith({ productCode });
