@@ -180,7 +180,7 @@ describe('ProductsController', () => {
       jest.spyOn(mockProductsService, 'updateProduct').mockReturnValue(product);
 
       await expect(
-        controller.updateProduct(productCode, updateProductBody),
+        controller.updateProduct({ productCode }, updateProductBody),
       ).resolves.toEqual(product);
 
       expect(mockProductsService.updateProduct).toHaveBeenCalled();
@@ -200,7 +200,7 @@ describe('ProductsController', () => {
       jest.spyOn(mockProductsService, 'updateProduct').mockReturnValue(null);
 
       await expect(
-        controller.updateProduct(productCode, updateProductBody),
+        controller.updateProduct({ productCode }, updateProductBody),
       ).rejects.toThrow(NotFoundException);
 
       expect(mockProductsService.updateProduct).toHaveBeenCalled();
@@ -222,7 +222,7 @@ describe('ProductsController', () => {
       jest.spyOn(mockProductsService, 'deleteProduct').mockReturnValue(true);
 
       await expect(
-        controller.deleteProduct(productCode),
+        controller.deleteProduct({ productCode }),
       ).resolves.not.toThrow();
 
       expect(mockProductsService.deleteProduct).toHaveBeenCalled();
@@ -236,7 +236,7 @@ describe('ProductsController', () => {
 
       jest.spyOn(mockProductsService, 'deleteProduct').mockReturnValue(false);
 
-      await expect(controller.deleteProduct(productCode)).rejects.toThrow(
+      await expect(controller.deleteProduct({ productCode })).rejects.toThrow(
         NotFoundException,
       );
 
