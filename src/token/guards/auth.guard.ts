@@ -31,13 +31,10 @@ export class AuthGuard implements CanActivate {
 
     try {
       const payload = await this.jwtService.verifyAsync(token);
-
       this.logger.debug('Payload body: ' + JSON.stringify(payload));
 
       request['user'] = payload;
     } catch (err) {
-      this.logger.error(err);
-
       if (err instanceof TokenExpiredError) {
         throw new UnauthorizedException('Expired bearer token');
       }

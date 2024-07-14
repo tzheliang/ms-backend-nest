@@ -14,7 +14,7 @@ import { TokenPayload } from '../token-payload.entity';
 export class AdminGuard implements CanActivate {
   private readonly logger = new Logger(AdminGuard.name);
 
-  constructor(private readonly jwtService: JwtService) {}
+  constructor() {}
 
   canActivate(context: ExecutionContext): boolean {
     this.logger.log('Checking user admin status');

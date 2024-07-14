@@ -41,3 +41,4 @@ Repository for the code solution to NestJS backend test.
 8. Install dependencies for JWT. `npm install --save @nestjs/jwt`
 9. Install dependencies for Swagger. `npm install --save @nestjs/swagger`
 10. Install dependencies for configuration. `npm install --save @nestjs/config`
+11. Install dependencies for unit testing mocks. `npm install --save @golevelup/test-js`
