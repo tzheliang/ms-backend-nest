@@ -1,11 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthGuard } from './auth.guard';
-import { TokenPayload } from '../token-payload.entity';
-import {
-  ExecutionContext,
-  ForbiddenException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { createMock } from '@golevelup/ts-jest';
 import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 
@@ -111,9 +106,7 @@ describe('AdminGuard', () => {
         })),
       });
 
-      jest
-        .spyOn(mockJwtService, 'verifyAsync')
-        .mockRejectedValue(new Error());
+      jest.spyOn(mockJwtService, 'verifyAsync').mockRejectedValue(new Error());
 
       await expect(guard.canActivate(mockExecutionContext)).rejects.toThrow(
         UnauthorizedException,

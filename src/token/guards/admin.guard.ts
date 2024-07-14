@@ -6,7 +6,6 @@ import {
   Logger,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { TokenPayload } from '../token-payload.entity';
 
